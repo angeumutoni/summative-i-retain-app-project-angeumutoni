@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import App from './App';
 import { AuthProvider } from './context/AuthProvider';
+import { NotificationProvider } from './context/NotificationProvider';
 import { store } from './store';
 import theme from './theme';
 
@@ -13,11 +14,13 @@ createRoot(document.getElementById('root')!).render(
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <BrowserRouter>
-          <AuthProvider>
-            <App />
-          </AuthProvider>
-        </BrowserRouter>
+        <NotificationProvider>
+          <BrowserRouter>
+            <AuthProvider>
+              <App />
+            </AuthProvider>
+          </BrowserRouter>
+        </NotificationProvider>
       </ThemeProvider>
     </Provider>
   </StrictMode>
