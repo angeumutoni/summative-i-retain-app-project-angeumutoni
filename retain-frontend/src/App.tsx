@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import AppLayout from './components/AppLayout';
 import ProtectedRoute from './routes/ProtectedRoute';
@@ -9,8 +10,22 @@ import DashboardPage from './pages/DashboardPage';
 import ExpensesPage from './pages/ExpensesPage';
 import AdminPage from './pages/AdminPage';
 import NotFoundPage from './pages/NotFoundPage';
+import { useAuth } from './context/useAuth';
+import { useAppDispatch } from './store/hooks';
+import { resetFilters } from './store/expenseFiltersSlice';
+import { clearExpenses } from './store/expensesSlice';
 
 export default function App() {
+  const { isAuthenticated } = useAuth();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      dispatch(resetFilters());
+      dispatch(clearExpenses());
+    }
+  }, [isAuthenticated, dispatch]);
+
   return (
     <Routes>
       <Route element={<GuestRoute />}>
