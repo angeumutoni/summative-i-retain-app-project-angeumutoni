@@ -1,7 +1,10 @@
 import {
+    Button,
     Card,
+    CardActions,
     CardContent,
     Chip,
+    IconButton,
     Paper,
     Stack,
     Table,
@@ -10,19 +13,26 @@ import {
     TableContainer,
     TableHead,
     TableRow,
+    Tooltip,
     Typography,
     useMediaQuery,
   } from '@mui/material';
   import { useTheme } from '@mui/material/styles';
+  import DeleteIcon from '@mui/icons-material/Delete';
+  import EditIcon from '@mui/icons-material/Edit';
+  import VisibilityIcon from '@mui/icons-material/Visibility';
   import { PAYMENT_METHOD_LABELS } from '../types';
   import type { Expense } from '../types';
   import { formatCurrency, formatDate } from '../utils/format';
   
   interface ExpenseListProps {
     expenses: Expense[];
+    onView: (expense: Expense) => void;
+    onEdit: (expense: Expense) => void;
+    onDelete: (expense: Expense) => void;
   }
   
-  export default function ExpenseList({ expenses }: ExpenseListProps) {
+  export default function ExpenseList({ expenses, onView, onEdit, onDelete }: ExpenseListProps) {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   
@@ -49,6 +59,17 @@ import {
                 </Typography>
                 <Chip label={expense.category.name} size="small" sx={{ mt: 1 }} />
               </CardContent>
+              <CardActions>
+                <Button size="small" onClick={() => onView(expense)}>
+                  View
+                </Button>
+                <Button size="small" onClick={() => onEdit(expense)}>
+                  Edit
+                </Button>
+                <Button size="small" color="error" onClick={() => onDelete(expense)}>
+                  Delete
+                </Button>
+              </CardActions>
             </Card>
           ))}
         </Stack>
@@ -65,6 +86,7 @@ import {
               <TableCell>Category</TableCell>
               <TableCell>Payment method</TableCell>
               <TableCell align="right">Amount</TableCell>
+              <TableCell align="right">Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -78,6 +100,27 @@ import {
                 <TableCell>{PAYMENT_METHOD_LABELS[expense.paymentMethod]}</TableCell>
                 <TableCell align="right" sx={{ fontWeight: 600 }}>
                   {formatCurrency(expense.amount)}
+                </TableCell>
+                <TableCell align="right" sx={{ whiteSpace: 'nowrap' }}>
+                  <Tooltip title="View details">
+                    <IconButton aria-label={`View ${expense.title}`} onClick={() => onView(expense)}>
+                      <VisibilityIcon fontSize="small" />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title="Edit">
+                    <IconButton aria-label={`Edit ${expense.title}`} onClick={() => onEdit(expense)}>
+                      <EditIcon fontSize="small" />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title="Delete">
+                    <IconButton
+                      aria-label={`Delete ${expense.title}`}
+                      color="error"
+                      onClick={() => onDelete(expense)}
+                    >
+                      <DeleteIcon fontSize="small" />
+                    </IconButton>
+                  </Tooltip>
                 </TableCell>
               </TableRow>
             ))}
