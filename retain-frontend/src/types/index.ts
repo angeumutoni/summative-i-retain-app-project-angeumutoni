@@ -151,3 +151,19 @@ export interface MessageResponse {
 export interface DeleteCategoryResponse extends MessageResponse {
   reassignedExpenses: number;
 }
+export type SortField = 'date' | 'amount';
+export type SortOrder = 'asc' | 'desc';
+
+export interface ExpenseFilters {
+  search: string;
+  category: string;
+  paymentMethod: PaymentMethod | '';
+  startDate: string;
+  endDate: string;
+  minAmount: string;
+  maxAmount: string;
+  sortBy: SortField;
+  order: SortOrder;
+  page: number;
+  limit: number;
+}
