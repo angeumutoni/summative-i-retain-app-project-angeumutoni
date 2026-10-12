@@ -2,7 +2,7 @@
 
 Retain is a full-stack web application for recording personal expenses, setting a monthly budget and seeing at a glance whether you are within, approaching or over it. Regular users manage their own expenses and see a spending dashboard, while administrators manage expense categories and view platform-wide insights.
 
-**Live application:** _to be added after frontend deployment_
+**Live application:** https://retain-app-tikb.onrender.com
 **Live API:** https://retain-api-ognq.onrender.com
 
 ## Technologies
