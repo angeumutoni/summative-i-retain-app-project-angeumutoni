@@ -14,6 +14,7 @@ import { useAuth } from './context/useAuth';
 import { useAppDispatch } from './store/hooks';
 import { resetFilters } from './store/expenseFiltersSlice';
 import { clearExpenses } from './store/expensesSlice';
+import ExpenseDetailPage from './pages/ExpenseDetailPage';
 
 export default function App() {
   const { isAuthenticated } = useAuth();
@@ -37,6 +38,7 @@ export default function App() {
         <Route element={<AppLayout />}>
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/expenses" element={<ExpensesPage />} />
+          <Route path="/expenses/:id" element={<ExpenseDetailPage />} />
           <Route element={<AdminRoute />}>
             <Route path="/admin" element={<AdminPage />} />
           </Route>
