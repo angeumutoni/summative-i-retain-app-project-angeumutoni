@@ -33,3 +33,20 @@ export const formatDateTime = (iso: string): string =>
     hour: '2-digit',
     minute: '2-digit',
   });
+
+// Month helpers use the YYYY-MM format the API expects
+export const currentMonthValue = (): string => todayInputValue().slice(0, 7);
+
+export const shiftMonth = (month: string, delta: number): string => {
+  const [year, mon] = month.split('-').map(Number);
+  return new Date(Date.UTC(year, mon - 1 + delta, 1)).toISOString().slice(0, 7);
+};
+
+export const formatMonth = (month: string): string => {
+  const [year, mon] = month.split('-').map(Number);
+  return new Date(Date.UTC(year, mon - 1, 1)).toLocaleDateString('en-GB', {
+    month: 'long',
+    year: 'numeric',
+    timeZone: 'UTC',
+  });
+};
