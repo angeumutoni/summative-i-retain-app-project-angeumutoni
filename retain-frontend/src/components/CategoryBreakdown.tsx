@@ -5,17 +5,22 @@ import { formatCurrency } from '../utils/format';
 interface CategoryBreakdownProps {
   items: CategorySpending[];
   total: number;
+  title?: string;
 }
 
-export default function CategoryBreakdown({ items, total }: CategoryBreakdownProps) {
+export default function CategoryBreakdown({
+  items,
+  total,
+  title = 'Spending by category',
+}: CategoryBreakdownProps) {
   return (
     <Paper variant="outlined" sx={{ p: 3 }}>
       <Typography variant="h6" component="h2" gutterBottom>
-        Spending by category
+        {title}
       </Typography>
 
       {items.length === 0 ? (
-        <Typography color="text.secondary">No spending recorded this month.</Typography>
+        <Typography color="text.secondary">No spending recorded yet.</Typography>
       ) : (
         <Stack spacing={2}>
           {items.map((item) => {
