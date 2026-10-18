@@ -6,7 +6,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon server.js",
     "start": "node server.js",
-    "seed": "node scripts/seed.js"
+    "seed": "node scripts/seed.js",
+    "seed:demo": "node scripts/seedDemo.js",
+    "cleanup": "node scripts/cleanup.js"
   },
   "keywords": [],
   "author": "",
