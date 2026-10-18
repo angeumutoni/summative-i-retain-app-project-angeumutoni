@@ -7,7 +7,8 @@ Retain is a full-stack web application for recording personal expenses, setting 
 
 ## Technologies
 
-The backend is a REST API built with Node.js and Express, storing data in MongoDB Atlas through Mongoose. Authentication uses JSON Web Tokens with bcrypt password hashing, and role-based middleware protects admin routes. The frontend (added later) uses React with TypeScript and Vite, React Context for authentication and protected routes, and Redux for searching, filtering and sorting.
+The backend is a REST API built with Node.js and Express, storing data in MongoDB Atlas through Mongoose. Authentication uses JSON Web Tokens with bcrypt password hashing, and role-based middleware protects admin routes. The frontend is built with React, TypeScript and Vite, with Material UI for the interface. React Context with a reducer handles authentication, roles and protected routes, and Redux Toolkit handles expense searching, filtering, sorting and pagination. Both parts are deployed on Render, the backend as a web service and the frontend as a static site.
+
 
 ## Main features
 
@@ -49,3 +50,11 @@ All routes except register, login and health require an `Authorization: Bearer <
 | GET | /api/admin/insights | Platform insights (admin) |
 
 The expense list accepts `search`, `category`, `paymentMethod`, `startDate`, `endDate`, `minAmount`, `maxAmount`, `sortBy` (date or amount), `order` (asc or desc), `page` and `limit`.
+
+## Demo accounts
+
+A demo user account is available for trying the live application: `demo.user@example.com` with the password `DemoUser-2026`. It has two months of sample expenses and budgets, which makes it easy to try the search, filters, sorting, pagination, budget statuses and dashboard. You can also create your own account on the sign-up page, and every new account has the normal user role.
+
+The administrator account is not listed here because the admin area shows user details and this repository is public. Its credentials are provided in the submission notes on Canvas.
+
+The backend runs on a free hosting instance that goes to sleep after a period of inactivity, so the first request after a quiet spell can take up to a minute while it wakes up.
